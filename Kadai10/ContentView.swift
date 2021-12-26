@@ -32,12 +32,13 @@ struct ContentView: View {
     }
 
     private func selectColor(_ value: Int) -> Color {
-        if value % 3 == 0 {
-            return .pink
-        } else if value % 3 == 1 {
-            return .green
-        } else {
-            return .blue
+        switch value % 3 {
+        case 0:
+            return .pink.opacity(0.3)
+        case 1:
+            return .green.opacity(0.3)
+        default:
+            return .blue.opacity(0.3)
         }
     }
 }
@@ -69,7 +70,8 @@ struct ListRowView: View {
 
 struct ListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ListRowView(prefecture: "東京都", rowNumber: 13, color: .green)
-            .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/300.0/*@END_MENU_TOKEN@*/, height: 55))
+        ListRowView(prefecture: "東京都", rowNumber: 13, color: .pink.opacity(0.3))
+            .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/300.0/*@END_MENU_TOKEN@*/,
+                                  height: /*@START_MENU_TOKEN@*/55.0/*@END_MENU_TOKEN@*/))
     }
 }
