@@ -23,22 +23,11 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(0..<prefectures.count) { index in
-                    ListRowView(prefecture: prefectures[index], rowNumber: index, color: selectColor(index))
+                    ListRowView(prefecture: prefectures[index], rowNumber: index)
                         .frame(height: 55)
                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
             }
-        }
-    }
-
-    private func selectColor(_ value: Int) -> Color {
-        switch value % 3 {
-        case 0:
-            return .pink.opacity(0.3)
-        case 1:
-            return .green.opacity(0.3)
-        default:
-            return .blue.opacity(0.3)
         }
     }
 }
@@ -52,11 +41,10 @@ struct ContentView_Previews: PreviewProvider {
 struct ListRowView: View {
     let prefecture: String
     let rowNumber: Int
-    let color: Color
 
     var body: some View {
         ZStack {
-            color
+            selectColor(row: rowNumber)
             HStack {
                 Text(prefecture)
                 Spacer()
@@ -66,11 +54,16 @@ struct ListRowView: View {
             .padding(.horizontal)
         }
     }
+
+    private func selectColor(row: Int) -> Color {
+        let colors: [Color] = [.pink, .green, .blue]
+        return colors[row % colors.count].opacity(0.3)
+    }
 }
 
 struct ListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ListRowView(prefecture: "東京都", rowNumber: 13, color: .pink.opacity(0.3))
+        ListRowView(prefecture: "東京都", rowNumber: 13)
             .previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/300.0/*@END_MENU_TOKEN@*/,
                                   height: /*@START_MENU_TOKEN@*/55.0/*@END_MENU_TOKEN@*/))
     }
