@@ -44,7 +44,7 @@ struct ListRowView: View {
 
     var body: some View {
         ZStack {
-            selectColor(rowNumber)
+            selectColor(row: rowNumber)
             HStack {
                 Text(prefecture)
                 Spacer()
@@ -55,9 +55,9 @@ struct ListRowView: View {
         }
     }
 
-    private func selectColor(_ value: Int) -> Color {
+    private func selectColor(row: Int) -> Color {
         let colors: [Color] = [.pink, .green, .blue]
-        return colors[value % colors.count].opacity(0.3)
+        return colors[row % colors.count].opacity(0.3)
     }
 }
 
